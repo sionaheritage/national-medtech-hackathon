@@ -97,14 +97,64 @@
         <div class="content-grid">
           <aside class="context-sidebar" aria-label="Patient record navigation">
             <nav class="context-nav">
-              <button class="context-button active" aria-label="Open record menu">
+              <button class="context-button active context-toggle" type="button" aria-label="Open record menu" aria-expanded="false" aria-controls="record-menu">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" /></svg>
               </button>
-              <button class="context-button" aria-label="Go back">
+              <button class="context-button" type="button" aria-label="Go back">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" /></svg>
               </button>
-              <button class="context-button" aria-label="Patient overview">
+              <button class="context-button" type="button" aria-label="Patient overview">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6M6 9v10h12V9m-8 10v-6h4v6" /></svg>
+              </button>
+            </nav>
+            <nav class="record-menu" id="record-menu" aria-label="Patient record sections" hidden>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v4a5 5 0 0 0 10 0V4M7 4H5v3a7 7 0 0 0 14 0V4h-2M12 13v3a4 4 0 0 0 4 4h1" /></svg>
+                <span>Primary Care (GP)</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5zM8 9h8M8 12h8M8 15h5" /></svg>
+                <span>Problems</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 16 8-8M7 7l2-2a3 3 0 0 1 4 4l-2 2M17 17l-2 2a3 3 0 0 1-4-4l2-2" /></svg>
+                <span>Medications</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-1 4-5 5-5 10a5 5 0 0 0 10 0c0-5-4-6-5-10ZM8 18l3-3 2 2 3-3" /></svg>
+                <span>Allergies</span>
+              </button>
+              <button class="record-link has-children" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16V9M11 16V5M16 16v-4M20 16V7" /></svg>
+                <span>Results</span><span class="record-chevron">‹</span>
+              </button>
+              <button class="record-link has-children" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V7l7-3 7 3v13M9 10h6M9 14h6M10 20v-3h4v3" /></svg>
+                <span>Secondary Care (Acute)</span><span class="record-chevron">‹</span>
+              </button>
+              <button class="record-link has-children" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10ZM5 13h4l2-3 2 5 2-3h4" /></svg>
+                <span>Social Care</span><span class="record-chevron">‹</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-13 6l-1 4 4-2a8 8 0 0 0 10-8ZM9 10h.01M15 10h.01M9 14c1.5 1.5 4.5 1.5 6 0" /></svg>
+                <span>Mental Health</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14v12H5zM9 8V5h6v3M12 11v6M9 14h6" /></svg>
+                <span>Community Health</span>
+              </button>
+              <button class="record-link" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.4 2.2 2.6-.3.8 2.5 2.4 1-1 2.4 1 2.4-2.4 1-.8 2.5-2.6-.3L12 19l-1.4-2.2-2.6.3-.8-2.5-2.4-1 1-2.4-1-2.4 2.4-1 .8-2.5 2.6.3L12 3ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" /></svg>
+                <span>Cancer Care</span>
+              </button>
+              <button class="record-link has-children" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3" /><path d="M5 20a7 7 0 0 1 14 0M18 5a3 3 0 0 1 0 6" /></svg>
+                <span>About Me</span><span class="record-chevron">‹</span>
+              </button>
+              <button class="record-link has-children" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
+                <span>Clinical Correspondence</span><span class="record-chevron">‹</span>
               </button>
             </nav>
           </aside>
@@ -171,13 +221,15 @@
             <div class="problems-panel">
               <h3>Problems</h3>
               <div class="problem-tabs">
-                <button class="tab-button">GP Active</button>
-                <button class="tab-button">GP Past</button>
-                <button class="tab-button active">Mental Health</button>
-                <button class="tab-button ghost">More</button>
+                <button class="tab-button" type="button" data-filter="active" aria-pressed="false">GP Active</button>
+                <button class="tab-button" type="button" data-filter="past" aria-pressed="false">GP Past</button>
+                <button class="tab-button active" type="button" data-filter="mental-health" aria-pressed="true">Mental Health</button>
+                <button class="tab-button ghost" type="button" data-filter="more" aria-expanded="false" aria-controls="more-problems">More</button>
               </div>
 
-              <ul class="problem-list">
+              <p class="problem-status" id="more-problems" hidden>Additional problem categories are not included in this demo.</p>
+
+              <ul class="problem-list" id="problem-list">
                 <li class="problem-item">
                   <div class="problem-text">
                     <span class="problem-name">Anxiety disorder, unspecified</span>
@@ -285,6 +337,71 @@
         alertsToggle.setAttribute('aria-expanded', 'false');
         alertsDropdown.hidden = true;
         alertsToggle.focus();
+      });
+
+      const contextSidebar = document.querySelector('.context-sidebar');
+      const menuToggle = document.querySelector('.context-toggle');
+      const recordMenu = document.querySelector('.record-menu');
+
+      menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+        recordMenu.hidden = isExpanded;
+        contextSidebar.classList.toggle('expanded', !isExpanded);
+      });
+
+      recordMenu.addEventListener('click', (event) => {
+        const selectedLink = event.target.closest('.record-link');
+        if (!selectedLink) return;
+
+        recordMenu.querySelectorAll('.record-link').forEach((link) => {
+          link.classList.toggle('selected', link === selectedLink);
+        });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || menuToggle.getAttribute('aria-expanded') !== 'true') return;
+
+        menuToggle.setAttribute('aria-expanded', 'false');
+        recordMenu.hidden = true;
+        contextSidebar.classList.remove('expanded');
+        menuToggle.focus();
+      });
+
+      const problemFilters = document.querySelectorAll('.tab-button[data-filter]');
+      const problemList = document.querySelector('#problem-list');
+      const moreProblems = document.querySelector('#more-problems');
+
+      problemFilters.forEach((button) => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+
+          if (filter === 'more') {
+            const isExpanded = button.getAttribute('aria-expanded') !== 'true';
+            button.setAttribute('aria-expanded', String(isExpanded));
+            button.classList.toggle('active', isExpanded);
+            problemFilters.forEach((filterButton) => {
+              if (filterButton.dataset.filter === 'more') return;
+              filterButton.classList.remove('active');
+              filterButton.setAttribute('aria-pressed', 'false');
+            });
+            moreProblems.hidden = !isExpanded;
+            problemList.hidden = true;
+            return;
+          }
+
+          problemFilters.forEach((filterButton) => {
+            filterButton.classList.toggle('active', filterButton === button);
+            if (filterButton.dataset.filter !== 'more') {
+              filterButton.setAttribute('aria-pressed', String(filterButton === button));
+            } else {
+              filterButton.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          moreProblems.hidden = true;
+          problemList.hidden = filter !== 'mental-health';
+        });
       });
     </script>
   </body>
