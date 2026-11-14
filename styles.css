@@ -65,40 +65,37 @@ textarea {
   padding: 18px 0 14px;
 }
 
-.brand-mark {
+.demo-toggle {
   position: relative;
+  display: grid;
+  place-items: center;
   width: 40px;
   height: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 1px solid #cbd6df;
+  border-radius: 50%;
+  background: #fff;
+  color: #435d7c;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
   margin-bottom: 18px;
 }
 
-.brand-ring {
-  position: absolute;
-  inset: 3px;
-  border: 3px solid var(--text);
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px transparent;
+.demo-toggle:hover {
+  background: #f0f5f8;
 }
 
-.brand-ring::before,
-.brand-ring::after {
-  content: "";
-  position: absolute;
-  inset: 7px 7px auto auto;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text);
+.demo-toggle:focus-visible,
+.alerts-pill:focus-visible {
+  outline: 2px solid #547da3;
+  outline-offset: 3px;
 }
 
-.brand-dot {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--text);
-  left: 5px;
-  top: 5px;
+.demo-toggle[aria-pressed="true"] {
+  border-color: #6d8eaa;
+  background: #e7f0f5;
 }
 
 .sidebar-nav {
@@ -181,6 +178,32 @@ textarea {
   padding-left: 10px;
 }
 
+.patient-name-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.patient-name-row strong {
+  min-width: 0;
+}
+
+.patient-alert-dot {
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d33b3b;
+  box-shadow: 0 0 0 3px rgba(211, 59, 59, 0.12);
+}
+
+.patient-alert-dot[hidden],
+.notification-card[hidden],
+.alerts-dropdown[hidden] {
+  display: none;
+}
+
 .meta-label {
   display: block;
   font-size: 0.68rem;
@@ -200,8 +223,13 @@ textarea {
   text-overflow: ellipsis;
 }
 
-.alerts-pill {
+.alerts-control {
+  position: relative;
   justify-self: end;
+}
+
+.alerts-pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -211,9 +239,74 @@ textarea {
   padding: 8px 14px;
   color: var(--text);
   font-weight: 600;
-  margin-left: 12px;
+  margin: 0;
   min-width: 128px;
   justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.app-shell.demo-mode .alerts-pill::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--panel-bg);
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+.alerts-dropdown {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(26, 42, 58, 0.16);
+}
+
+.alerts-heading {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.notification-card {
+  padding: 12px;
+  border: 1px solid #f0c4c4;
+  border-left: 4px solid #d33b3b;
+  border-radius: 8px;
+  background: #fffafa;
+}
+
+.notification-label {
+  color: #a52c2c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.notification-card p {
+  margin: 8px 0;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.notification-time,
+.alerts-empty {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.alerts-empty {
+  margin: 0;
+  line-height: 1.45;
 }
 
 .bell-icon {

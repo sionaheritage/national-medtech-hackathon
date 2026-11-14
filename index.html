@@ -9,10 +9,9 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar">
-        <div class="brand-mark" aria-label="Brand logo">
-          <span class="brand-ring"></span>
-          <span class="brand-dot"></span>
-        </div>
+        <button class="demo-toggle" id="demo-toggle" type="button" aria-label="Turn demo alerts on" aria-pressed="false" title="Toggle demo alerts">
+          <span aria-hidden="true">D</span>
+        </button>
 
         <nav class="sidebar-nav" aria-label="Sidebar navigation">
           <button class="nav-button" aria-label="Home">
@@ -48,7 +47,10 @@
         <header class="topbar">
           <div class="meta-item name-field">
             <span class="meta-label">Name</span>
-            <strong>Donotus XXTESTPATIENT-TGLS</strong>
+            <div class="patient-name-row">
+              <strong>Donotus XXTESTPATIENT-TGLS</strong>
+              <span class="patient-alert-dot" id="patient-alert-dot" role="img" aria-label="Urgent demo notification" hidden></span>
+            </div>
           </div>
           <div class="meta-item">
             <span class="meta-label">Sex</span>
@@ -74,10 +76,21 @@
             <span class="meta-label">Contact Number</span>
             <strong>Not Recorded</strong>
           </div>
-          <div class="alerts-pill">
-            <span class="bell-icon">◔</span>
-            <span>2 Alerts</span>
-            <span class="caret">⌄</span>
+          <div class="alerts-control">
+            <button class="alerts-pill" id="alerts-toggle" type="button" aria-expanded="false" aria-controls="alerts-dropdown">
+              <span class="bell-icon" aria-hidden="true">◔</span>
+              <span><span id="alert-count">2</span> Alerts</span>
+              <span class="caret" aria-hidden="true">⌄</span>
+            </button>
+            <div class="alerts-dropdown" id="alerts-dropdown" role="region" aria-label="Patient alerts" hidden>
+              <h2 class="alerts-heading">Notifications</h2>
+              <article class="notification-card" id="demo-notification" hidden>
+                <span class="notification-label">Urgent patient update</span>
+                <p>Patient is in A&amp;E and has had a Martha's Rule request.</p>
+                <span class="notification-time">Just now · Demo alert</span>
+              </article>
+              <p class="alerts-empty" id="alerts-empty">Turn on demo alerts to show the A&amp;E and Martha's Rule notification.</p>
+            </div>
           </div>
         </header>
 
@@ -233,5 +246,46 @@
         </div>
       </main>
     </div>
+    <script>
+      const appShell = document.querySelector('.app-shell');
+      const demoToggle = document.querySelector('#demo-toggle');
+      const patientAlertDot = document.querySelector('#patient-alert-dot');
+      const alertCount = document.querySelector('#alert-count');
+      const alertsControl = document.querySelector('.alerts-control');
+      const alertsToggle = document.querySelector('#alerts-toggle');
+      const alertsDropdown = document.querySelector('#alerts-dropdown');
+      const demoNotification = document.querySelector('#demo-notification');
+      const alertsEmpty = document.querySelector('#alerts-empty');
+
+      demoToggle.addEventListener('click', () => {
+        const demoEnabled = demoToggle.getAttribute('aria-pressed') !== 'true';
+        demoToggle.setAttribute('aria-pressed', String(demoEnabled));
+        demoToggle.setAttribute('aria-label', `Turn demo alerts ${demoEnabled ? 'off' : 'on'}`);
+        appShell.classList.toggle('demo-mode', demoEnabled);
+        patientAlertDot.hidden = !demoEnabled;
+        alertCount.textContent = demoEnabled ? '3' : '2';
+        demoNotification.hidden = !demoEnabled;
+        alertsEmpty.hidden = demoEnabled;
+      });
+
+      alertsToggle.addEventListener('click', () => {
+        const isExpanded = alertsToggle.getAttribute('aria-expanded') === 'true';
+        alertsToggle.setAttribute('aria-expanded', String(!isExpanded));
+        alertsDropdown.hidden = isExpanded;
+      });
+
+      document.addEventListener('click', (event) => {
+        if (alertsControl.contains(event.target)) return;
+        alertsToggle.setAttribute('aria-expanded', 'false');
+        alertsDropdown.hidden = true;
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || alertsToggle.getAttribute('aria-expanded') !== 'true') return;
+        alertsToggle.setAttribute('aria-expanded', 'false');
+        alertsDropdown.hidden = true;
+        alertsToggle.focus();
+      });
+    </script>
   </body>
 </html>
