@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Care Planning Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-mark" aria-label="Brand logo">
+          <span class="brand-ring"></span>
+          <span class="brand-dot"></span>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sidebar navigation">
+          <button class="nav-button" aria-label="Home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-7H9v7H5a1 1 0 0 1-1-1v-8.5Z"/></svg>
+          </button>
+          <button class="nav-button active" aria-label="Menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </button>
+          <button class="nav-button" aria-label="User">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-7 7a7 7 0 0 1 14 0"/></svg>
+          </button>
+          <button class="nav-button" aria-label="Alerts">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h12l-1.2-8.7A5.4 5.4 0 0 0 12 4a5.4 5.4 0 0 0-4.8 4.3L6 17Zm3.2 0a2.8 2.8 0 0 0 5.6 0"/></svg>
+          </button>
+          <button class="nav-button" aria-label="Reports">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 19V9M12 19V5M17 19v-8"/></svg>
+          </button>
+          <button class="nav-button" aria-label="Calendar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z"/></svg>
+          </button>
+          <button class="nav-button" aria-label="Settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v3M12 17.5v3M4.93 4.93l2.12 2.12M17 17l2.12 2.12M3.5 12h3M17.5 12h3M4.93 19.07l2.12-2.12M17 7l2.12-2.12M12 8.5A3.5 3.5 0 1 1 12 15.5 3.5 3.5 0 0 1 12 8.5Z"/></svg>
+          </button>
+          <button class="nav-button" aria-label="Support">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 10.5v-1A4 4 0 1 1 16 9.5v1M6 16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3H6v3Z"/></svg>
+          </button>
+        </nav>
+
+        <div class="user-pill">RJ</div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="meta-item name-field">
+            <span class="meta-label">Name</span>
+            <strong>Donotus XXTESTPATIENT-TGLS</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Sex</span>
+            <strong>Female</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Born</span>
+            <strong>12-Jul-2006 (19y)</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">NHS No</span>
+            <strong>999 054 8064</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Patient No</span>
+            <strong>999 054 8064</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Address</span>
+            <strong>Not Recorded</strong>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Contact Number</span>
+            <strong>Not Recorded</strong>
+          </div>
+          <div class="alerts-pill">
+            <span class="bell-icon">◔</span>
+            <span>2 Alerts</span>
+            <span class="caret">⌄</span>
+          </div>
+        </header>
+
+        <div class="content-grid">
+          <aside class="context-sidebar" aria-label="Patient record navigation">
+            <nav class="context-nav">
+              <button class="context-button active" aria-label="Open record menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" /></svg>
+              </button>
+              <button class="context-button" aria-label="Go back">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" /></svg>
+              </button>
+              <button class="context-button" aria-label="Patient overview">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6M6 9v10h12V9m-8 10v-6h4v6" /></svg>
+              </button>
+            </nav>
+          </aside>
+
+          <aside class="category-panel">
+            <div class="panel-title-box">
+              <span class="title-icon">☰</span>
+              <h2>GP Advance Care Planning</h2>
+            </div>
+
+            <div class="empty-state">No items exist for this category</div>
+
+            <div class="category-block">
+              <h3>Allergies</h3>
+              <div class="category-summary">
+                <div class="summary-title">ALLERGIES</div>
+                <div class="summary-row">
+                  <span>Total</span>
+                  <span>Latest</span>
+                </div>
+                <div class="summary-row highlight-row">
+                  <strong>3</strong>
+                  <strong>18-Jul-2024</strong>
+                </div>
+                <div class="summary-note">Bolton NHS Foundation Trust</div>
+              </div>
+            </div>
+
+            <div class="category-block">
+              <h3>GP Vitals</h3>
+              <div class="empty-state small">No items exist for this category</div>
+            </div>
+
+            <div class="category-block">
+              <h3>GP Frailty</h3>
+              <div class="empty-state small">No items exist for this category</div>
+            </div>
+          </aside>
+
+          <section class="center-panel">
+            <div class="info-banner accent">
+              <div class="badge-lg"></div>
+              <div class="banner-copy">
+                <strong>Caution:</strong> "No items found" does not mean the data in question does not exist in the Patient's GP record. DO NOT ASSUME THEY HAVE NO MEDICAL HISTORY
+              </div>
+            </div>
+
+            <div class="info-banner neutral">
+              <div class="badge-lg warn"></div>
+              <div class="banner-copy">
+                <strong>For clinical safety guidance please click to see information on data feeds</strong>
+                <span>Updated 09-Sep-2024 10:05</span>
+              </div>
+            </div>
+
+            <div class="data-card gp-feed">
+              <div class="card-icon purple">◫</div>
+              <div class="card-copy">
+                <strong>GP real-time information (GP Connect)</strong>
+              </div>
+              <div class="realtime-tag">Realtime</div>
+            </div>
+
+            <div class="problems-panel">
+              <h3>Problems</h3>
+              <div class="problem-tabs">
+                <button class="tab-button">GP Active</button>
+                <button class="tab-button">GP Past</button>
+                <button class="tab-button active">Mental Health</button>
+                <button class="tab-button ghost">More</button>
+              </div>
+
+              <ul class="problem-list">
+                <li class="problem-item">
+                  <div class="problem-text">
+                    <span class="problem-name">Anxiety disorder, unspecified</span>
+                    <span class="problem-type">GM Mental Health</span>
+                  </div>
+                  <span class="problem-date">15-Apr-2020</span>
+                </li>
+                <li class="problem-item">
+                  <div class="problem-text">
+                    <span class="problem-name">Dementia in Alzheimer disease, unspecified</span>
+                    <span class="problem-type">GM Mental Health</span>
+                  </div>
+                  <span class="problem-date">10-Feb-2020</span>
+                </li>
+                <li class="problem-item">
+                  <div class="problem-text">
+                    <span class="problem-name">Mild cognitive disorder</span>
+                    <span class="problem-type">GM Mental Health</span>
+                  </div>
+                  <span class="problem-date">02-Jan-2020</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <aside class="right-panel">
+            <div class="panel-block tall-panel">
+              <div class="mini-header">
+                <h3>Care Planning</h3>
+                <span class="chevron">›</span>
+              </div>
+              <div class="mini-list empty-minilist">No items exist for this category</div>
+            </div>
+
+            <div class="panel-block list-panel">
+              <div class="mini-header">
+                <h3>Key Information</h3>
+                <span class="chevron">›</span>
+              </div>
+              <div class="mini-list empty-minilist">No items exist for this category</div>
+            </div>
+
+            <div class="panel-block list-panel">
+              <div class="mini-header">
+                <h3>Contacts</h3>
+                <span class="chevron">›</span>
+              </div>
+              <div class="contact-item">
+                <span>GMA CAS</span>
+                <span class="muted">Local ID 9999990002</span>
+              </div>
+              <div class="contact-item">
+                <span>WWL Community</span>
+                <span class="muted">Local ID 1111111111-2</span>
+              </div>
+              <div class="contact-item">
+                <span>Bolton NHS Foundation Trust</span>
+                <span class="muted">Local ID 2222222222-2</span>
+              </div>
+              <div class="contact-item">
+                <span>North West Boroughs Healthcare</span>
+                <span class="muted">Local ID 3333333333-2</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
