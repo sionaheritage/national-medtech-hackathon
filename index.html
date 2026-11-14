@@ -208,13 +208,15 @@
             <div class="problems-panel">
               <h3>Problems</h3>
               <div class="problem-tabs">
-                <button class="tab-button">GP Active</button>
-                <button class="tab-button">GP Past</button>
-                <button class="tab-button active">Mental Health</button>
-                <button class="tab-button ghost">More</button>
+                <button class="tab-button" type="button" data-filter="active" aria-pressed="false">GP Active</button>
+                <button class="tab-button" type="button" data-filter="past" aria-pressed="false">GP Past</button>
+                <button class="tab-button active" type="button" data-filter="mental-health" aria-pressed="true">Mental Health</button>
+                <button class="tab-button ghost" type="button" data-filter="more" aria-expanded="false" aria-controls="more-problems">More</button>
               </div>
 
-              <ul class="problem-list">
+              <p class="problem-status" id="more-problems" hidden>Additional problem categories are not included in this demo.</p>
+
+              <ul class="problem-list" id="problem-list">
                 <li class="problem-item">
                   <div class="problem-text">
                     <span class="problem-name">Anxiety disorder, unspecified</span>
@@ -311,6 +313,42 @@
         recordMenu.hidden = true;
         contextSidebar.classList.remove('expanded');
         menuToggle.focus();
+      });
+
+      const problemFilters = document.querySelectorAll('.tab-button[data-filter]');
+      const problemList = document.querySelector('#problem-list');
+      const moreProblems = document.querySelector('#more-problems');
+
+      problemFilters.forEach((button) => {
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+
+          if (filter === 'more') {
+            const isExpanded = button.getAttribute('aria-expanded') !== 'true';
+            button.setAttribute('aria-expanded', String(isExpanded));
+            button.classList.toggle('active', isExpanded);
+            problemFilters.forEach((filterButton) => {
+              if (filterButton.dataset.filter === 'more') return;
+              filterButton.classList.remove('active');
+              filterButton.setAttribute('aria-pressed', 'false');
+            });
+            moreProblems.hidden = !isExpanded;
+            problemList.hidden = true;
+            return;
+          }
+
+          problemFilters.forEach((filterButton) => {
+            filterButton.classList.toggle('active', filterButton === button);
+            if (filterButton.dataset.filter !== 'more') {
+              filterButton.setAttribute('aria-pressed', String(filterButton === button));
+            } else {
+              filterButton.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          moreProblems.hidden = true;
+          problemList.hidden = filter !== 'mental-health';
+        });
       });
     </script>
   </body>
