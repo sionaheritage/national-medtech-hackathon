@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Martha's Rule Request | Care Planning Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="request-page">
+    <main class="request-shell">
+      <a class="request-back-link" href="index.html">
+        <span aria-hidden="true">←</span> Back to patient record
+      </a>
+
+      <header class="request-page-header">
+        <div>
+          <p class="request-eyebrow">PATIENT ESCALATION</p>
+          <h1>Martha's Rule request</h1>
+          <p class="request-patient">Donotus XXTESTPATIENT-TGLS <span>·</span> Demo record</p>
+        </div>
+        <span class="request-status">Awaiting review</span>
+      </header>
+
+      <section class="quick-summary" aria-labelledby="summary-heading">
+        <p class="request-eyebrow">QUICK SUMMARY</p>
+        <h2 id="summary-heading">Carer escalation following an A&amp;E admission</h2>
+        <p>
+          The patient was admitted to A&amp;E after a car crash with broken ribs. The carer is concerned about acute deterioration and has requested a review through Martha's Rule.
+        </p>
+      </section>
+
+      <section class="request-actions" aria-label="Request actions">
+        <p class="request-eyebrow">ACTIONS</p>
+        <div class="request-action-buttons">
+          <button class="request-action-button" type="button" data-resolution="Transfers of care to high dependency or intensive care units">Transfers of care to high dependency or intensive care units</button>
+          <button class="request-action-button" type="button" data-resolution="Enhanced levels of care">Enhanced levels of care</button>
+          <button class="request-action-button" type="button" data-resolution="Tertiary centres or referral/transfer to specialists or a specialist ward">Tertiary centres or referral/transfer to specialists or a specialist ward</button>
+          <button class="request-action-button notes-action" id="notes-action" type="button" aria-expanded="false" aria-controls="notes-reason-form">None of the above and commit to patient's notes</button>
+        </div>
+        <form class="notes-reason-form" id="notes-reason-form" hidden>
+          <label for="doctor-reason">Doctor's reason for recording none of the above</label>
+          <textarea id="doctor-reason" name="doctor-reason" rows="4" required maxlength="1000"></textarea>
+          <button class="request-action-button primary" type="submit">Commit to patient's notes</button>
+        </form>
+        <p class="request-action-status" id="request-action-status" aria-live="polite" hidden></p>
+      </section>
+
+      <section class="submitted-request" aria-labelledby="submitted-heading">
+        <div class="section-heading">
+          <div>
+            <p class="request-eyebrow">SUBMITTED FORM</p>
+            <h2 id="submitted-heading">Request details</h2>
+          </div>
+          <span class="submitted-time">Submitted · Demo</span>
+        </div>
+
+        <form class="submitted-form">
+          <div class="requester-fields">
+            <div class="form-field full-width">
+              <label for="carer-name">Carer's full name</label>
+              <input id="carer-name" name="carer-name" type="text" value="Alex Taylor" readonly />
+            </div>
+            <div class="form-field">
+              <label for="patient-nhs-number">Patient's NHS number</label>
+              <input id="patient-nhs-number" name="patient-nhs-number" type="text" value="999 054 8064" readonly />
+            </div>
+            <div class="form-field">
+              <label for="carer-relationship">Relationship to patient</label>
+              <input id="carer-relationship" name="carer-relationship" type="text" value="Carer" readonly />
+            </div>
+            <div class="form-field full-width">
+              <label for="patient-name">Patient's name</label>
+              <input id="patient-name" name="patient-name" type="text" value="Donotus XXTESTPATIENT-TGLS" readonly />
+            </div>
+          </div>
+
+          <fieldset class="request-type-field">
+            <legend>Request type</legend>
+            <label class="request-type-option">
+              <input type="radio" name="request-type" disabled />
+              <span>Family/carer escalation process</span>
+            </label>
+            <label class="request-type-option selected">
+              <input type="radio" name="request-type" checked disabled />
+              <span>Concern for acute deterioration</span>
+            </label>
+          </fieldset>
+
+          <div class="form-field">
+            <label for="request-reason">Why are you requesting a review?</label>
+            <textarea id="request-reason" name="request-reason" rows="5" readonly>Since returning from A&amp;E, the patient has seemed more uncomfortable than expected and has been less able to rest. I am worried their condition may be getting worse and would like a clinician to review them through the escalation process.</textarea>
+          </div>
+        </form>
+
+        <p class="demo-disclaimer">Demo only. This page does not send a request or update a clinical record.</p>
+      </section>
+    </main>
+
+    <script>
+      const actionStatus = document.querySelector('#request-action-status');
+      const notesAction = document.querySelector('#notes-action');
+      const notesReasonForm = document.querySelector('#notes-reason-form');
+      const doctorReason = document.querySelector('#doctor-reason');
+      const resolutionStorageKey = 'marthaRuleDemoResolution';
+      const notesActionLabel = "None of the above and commit to patient's notes";
+
+      const saveResolution = (action, reason = '') => {
+        localStorage.setItem(resolutionStorageKey, JSON.stringify({ action, reason }));
+        actionStatus.textContent = `Demo outcome saved: ${action}${reason ? `. Reason: ${reason}` : ''}. Notifications are dismissed until the dashboard is refreshed. No real clinical record was changed.`;
+        actionStatus.hidden = false;
+      };
+
+      document.querySelectorAll('[data-resolution]').forEach((button) => {
+        button.addEventListener('click', () => {
+          saveResolution(button.dataset.resolution);
+        });
+      });
+
+      notesAction.addEventListener('click', () => {
+        const isExpanded = notesAction.getAttribute('aria-expanded') === 'true';
+        notesAction.setAttribute('aria-expanded', String(!isExpanded));
+        notesReasonForm.hidden = isExpanded;
+        if (!isExpanded) doctorReason.focus();
+      });
+
+      notesReasonForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const reason = doctorReason.value.trim();
+        if (!reason) {
+          doctorReason.setCustomValidity('Enter a reason before committing to the notes.');
+          doctorReason.reportValidity();
+          return;
+        }
+
+        doctorReason.setCustomValidity('');
+        saveResolution(notesActionLabel, reason);
+      });
+
+      doctorReason.addEventListener('input', () => doctorReason.setCustomValidity(''));
+    </script>
+  </body>
+</html>
