@@ -1066,7 +1066,6 @@ body.request-page {
   white-space: nowrap;
 }
 
-.quick-summary,
 .submitted-request,
 .request-actions {
   margin-bottom: 18px;
@@ -1077,20 +1076,11 @@ body.request-page {
   box-shadow: 0 2px 6px var(--shadow);
 }
 
-.quick-summary {
+.request-narrative {
+  margin: 0;
+  padding: 14px;
   border-left: 4px solid var(--teal);
   background: #f8fcfc;
-}
-
-.quick-summary h2 {
-  margin: 8px 0;
-  font-size: 1.05rem;
-  color: #344356;
-}
-
-.quick-summary > p:last-child {
-  max-width: 75ch;
-  margin: 0;
   color: var(--muted);
   line-height: 1.6;
 }
@@ -1150,6 +1140,11 @@ body.request-page {
 .form-field textarea {
   min-height: 120px;
   resize: vertical;
+}
+
+.form-field textarea.readonly-answer {
+  min-height: 72px;
+  resize: none;
 }
 
 .request-type-field {
@@ -1315,7 +1310,6 @@ body.request-page {
     padding: 18px 12px;
   }
 
-  .quick-summary,
   .submitted-request,
   .request-actions {
     padding: 16px;

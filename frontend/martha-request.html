@@ -21,30 +21,6 @@
         <span class="request-status">Awaiting review</span>
       </header>
 
-      <section class="quick-summary" aria-labelledby="summary-heading">
-        <p class="request-eyebrow">QUICK SUMMARY</p>
-        <h2 id="summary-heading">Carer escalation following an A&amp;E admission</h2>
-        <p>
-          The patient was admitted to A&amp;E after a car crash with broken ribs. The carer is concerned about acute deterioration and has requested a review through Martha's Rule.
-        </p>
-      </section>
-
-      <section class="request-actions" aria-label="Request actions">
-        <p class="request-eyebrow">ACTIONS</p>
-        <div class="request-action-buttons">
-          <button class="request-action-button" type="button" data-resolution="Transfers of care to high dependency or intensive care units">Transfers of care to high dependency or intensive care units</button>
-          <button class="request-action-button" type="button" data-resolution="Enhanced levels of care">Enhanced levels of care</button>
-          <button class="request-action-button" type="button" data-resolution="Tertiary centres or referral/transfer to specialists or a specialist ward">Tertiary centres or referral/transfer to specialists or a specialist ward</button>
-          <button class="request-action-button notes-action" id="notes-action" type="button" aria-expanded="false" aria-controls="notes-reason-form">None of the above and commit to patient's notes</button>
-        </div>
-        <form class="notes-reason-form" id="notes-reason-form" hidden>
-          <label for="doctor-reason">Doctor's reason for recording none of the above</label>
-          <textarea id="doctor-reason" name="doctor-reason" rows="4" required maxlength="1000"></textarea>
-          <button class="request-action-button primary" type="submit">Commit to patient's notes</button>
-        </form>
-        <p class="request-action-status" id="request-action-status" aria-live="polite" hidden></p>
-      </section>
-
       <section class="submitted-request" aria-labelledby="submitted-heading">
         <div class="section-heading">
           <div>
@@ -55,6 +31,30 @@
         </div>
 
         <form class="submitted-form">
+          <p class="request-narrative">
+            Since returning from A&amp;E, the patient has seemed more uncomfortable than expected and has been less able to rest. I am worried their condition may be getting worse and would like a clinician to review them through the escalation process.
+          </p>
+
+          <div class="form-field">
+            <label for="deterioration-details">Describe in your own words the deterioration you have noticed e.g. changes in behaviour, hobbies, eating, personality</label>
+            <textarea class="readonly-answer" id="deterioration-details" name="deterioration-details" rows="3" readonly>Since returning from A&amp;E, the patient has been eating less, seems quieter and more uncomfortable, and has not been interested in their usual hobbies. They are also finding it harder to rest.</textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="clinical-team-spoken">Have you already spoken to your clinical team about your concerns?*</label>
+            <textarea class="readonly-answer" id="clinical-team-spoken" name="clinical-team-spoken" rows="2" readonly>Yes — I spoke with a member of the clinical team earlier today.</textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="concerns-addressed">Were your concerns addressed suitably by the clinical team?</label>
+            <textarea class="readonly-answer" id="concerns-addressed" name="concerns-addressed" rows="2" readonly>No — I was reassured at the time, but the changes have continued and I remain concerned.</textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="requested-actions">What actions would you like the clinical team to take?</label>
+            <textarea class="readonly-answer" id="requested-actions" name="requested-actions" rows="2" readonly>Please arrange an urgent clinical review, reassess the patient's condition, and explain the next steps to me.</textarea>
+          </div>
+
           <div class="requester-fields">
             <div class="form-field full-width">
               <label for="carer-name">Carer's full name</label>
@@ -85,14 +85,25 @@
               <span>Concern for acute deterioration</span>
             </label>
           </fieldset>
-
-          <div class="form-field">
-            <label for="request-reason">Why are you requesting a review?</label>
-            <textarea id="request-reason" name="request-reason" rows="5" readonly>Since returning from A&amp;E, the patient has seemed more uncomfortable than expected and has been less able to rest. I am worried their condition may be getting worse and would like a clinician to review them through the escalation process.</textarea>
-          </div>
         </form>
 
         <p class="demo-disclaimer">Demo only. This page does not send a request or update a clinical record.</p>
+      </section>
+
+      <section class="request-actions" aria-label="Request actions">
+        <p class="request-eyebrow">ACTIONS</p>
+        <div class="request-action-buttons">
+          <button class="request-action-button" type="button" data-resolution="Transfers of care to high dependency or intensive care units">Transfers of care to high dependency or intensive care units</button>
+          <button class="request-action-button" type="button" data-resolution="Enhanced levels of care">Enhanced levels of care</button>
+          <button class="request-action-button" type="button" data-resolution="Tertiary centres or referral/transfer to specialists or a specialist ward">Tertiary centres or referral/transfer to specialists or a specialist ward</button>
+          <button class="request-action-button notes-action" id="notes-action" type="button" aria-expanded="false" aria-controls="notes-reason-form">None of the above and commit to patient's notes</button>
+        </div>
+        <form class="notes-reason-form" id="notes-reason-form" hidden>
+          <label for="doctor-reason">Doctor's reason for recording none of the above</label>
+          <textarea id="doctor-reason" name="doctor-reason" rows="4" required maxlength="1000"></textarea>
+          <button class="request-action-button primary" type="submit">Commit to patient's notes</button>
+        </form>
+        <p class="request-action-status" id="request-action-status" aria-live="polite" hidden></p>
       </section>
     </main>
 
