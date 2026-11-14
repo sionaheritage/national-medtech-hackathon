@@ -389,13 +389,6 @@
         alertsDropdown.hidden = true;
       });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key !== 'Escape' || alertsToggle.getAttribute('aria-expanded') !== 'true') return;
-        alertsToggle.setAttribute('aria-expanded', 'false');
-        alertsDropdown.hidden = true;
-        alertsToggle.focus();
-      });
-
       const contextSidebar = document.querySelector('.context-sidebar');
       const menuToggle = document.querySelector('.context-toggle');
       const recordMenu = document.querySelector('.record-menu');
@@ -417,12 +410,23 @@
       });
 
       document.addEventListener('keydown', (event) => {
-        if (event.key !== 'Escape' || menuToggle.getAttribute('aria-expanded') !== 'true') return;
+        if (event.key !== 'Escape') return;
 
-        menuToggle.setAttribute('aria-expanded', 'false');
-        recordMenu.hidden = true;
-        contextSidebar.classList.remove('expanded');
-        menuToggle.focus();
+        let focusTarget = null;
+        if (alertsToggle.getAttribute('aria-expanded') === 'true') {
+          alertsToggle.setAttribute('aria-expanded', 'false');
+          alertsDropdown.hidden = true;
+          focusTarget = alertsToggle;
+        }
+
+        if (menuToggle.getAttribute('aria-expanded') === 'true') {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          recordMenu.hidden = true;
+          contextSidebar.classList.remove('expanded');
+          focusTarget = menuToggle;
+        }
+
+        if (focusTarget) focusTarget.focus();
       });
 
       const problemFilters = document.querySelectorAll('.tab-button[data-filter]');

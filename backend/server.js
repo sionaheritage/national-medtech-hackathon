@@ -2,8 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const port = 3000;
-const rootDir = __dirname;
+const port = Number(process.env.PORT || 3000);
+const frontendDir = path.resolve(__dirname, '..', 'frontend');
 
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -18,11 +18,24 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  const requestPath = req.url === '/' ? '/index.html' : req.url.split('?')[0];
-  const safePath = path.normalize(decodeURIComponent(requestPath));
-  const filePath = path.join(rootDir, safePath);
+  let requestPath;
+  try {
+    requestPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Bad request');
+    return;
+  }
 
-  if (!filePath.startsWith(rootDir)) {
+  if (requestPath.includes('\0')) {
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Bad request');
+    return;
+  }
+
+  const filePath = path.resolve(frontendDir, `.${requestPath === '/' ? '/index.html' : requestPath}`);
+  const relativePath = path.relative(frontendDir, filePath);
+  if (relativePath === '..' || relativePath.startsWith(`..${path.sep}`) || path.isAbsolute(relativePath)) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Forbidden');
     return;
@@ -30,7 +43,7 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      if (error.code === 'ENOENT') {
+      if (error.code === 'ENOENT' || error.code === 'ENOTDIR') {
         res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
         res.end('Not found');
       } else {
@@ -49,5 +62,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, '127.0.0.1', () => {
-  console.log(`Local UI is running at http://localhost:${port}`);
+  const address = server.address();
+  const runningPort = address && typeof address !== 'string' ? address.port : port;
+  console.log(`Local UI is running at http://localhost:${runningPort}`);
 });
